@@ -1,4 +1,5 @@
-﻿using MyShop.Core.Models;
+﻿using MyShop.Core.Contracts;
+using MyShop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace MyShop.DataAccess.InMemory
 {
-    public class InMemoryrepository<T/*or anything u want*/> where T : BaseEntity // whenever we pass in an object it must be of the type BaseEntity or inherit from BaseEntity
-    // also since baseEntity has an Id it means whenever we reference the Id our generic class knows what that is
+    public class InMemoryrepository<T/*or anything u want*/> : IRepository<T> where T : BaseEntity // whenever we pass in an object it must be of the type BaseEntity or inherit from BaseEntity
+                                                                                  // also since baseEntity has an Id it means whenever we reference the Id our generic class knows what that is
     {
         ObjectCache cache = MemoryCache.Default;
         List<T/*referencing our placeholder*/> items;
@@ -30,6 +31,7 @@ namespace MyShop.DataAccess.InMemory
         {
             cache[className] = items;
         }
+
 
         public void Insert(T t)
         {

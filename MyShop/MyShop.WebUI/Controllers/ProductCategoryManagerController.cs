@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyShop.Core.Models;
 using MyShop.DataAccess.InMemory;
+using MyShop.Core.Contracts;
 
 namespace MyShop.WebUI.Controllers
 {
@@ -12,11 +13,14 @@ namespace MyShop.WebUI.Controllers
     {
         //ProductCategoryRepository context;   // instance of our product repository
 
-        InMemoryrepository<ProductCategory> context;
+        //InMemoryrepository<ProductCategory> context; //replaced with Irepository
+        IRepository<ProductCategory> context;
 
-        public ProductCategoryManagerController()  // constructor for product controller that initializes our repository
+        public ProductCategoryManagerController  // constructor for product controller that initializes our repository
+            (IRepository<ProductCategory>context)  // injected the repo
         {
-            context = new InMemoryrepository<ProductCategory>();
+            //context = new InMemoryrepository<ProductCategory>(); //replaced after injection
+            this.context = context;
         }
         // GET: ProductManager
         public ActionResult Index()

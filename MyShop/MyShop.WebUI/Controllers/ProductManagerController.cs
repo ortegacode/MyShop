@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MyShop.Core.Models;
 using MyShop.DataAccess.InMemory;
 using MyShop.Core.ViewModels;
+using MyShop.Core.Contracts;
 
 namespace MyShop.WebUI.Controllers
 {
@@ -15,13 +16,19 @@ namespace MyShop.WebUI.Controllers
         //ProductCategoryRepository productCategories; // so we can load productCategories from database
         // replaced by the generic repository below
 
-        InMemoryrepository<Product> context;
-        InMemoryrepository<ProductCategory> productCategories;
+        //InMemoryrepository<Product> context; not used anymore we r using Irepository down below
+        //InMemoryrepository<ProductCategory> productCategories;
 
-        public ProductManagerController()  // constructor for product controller that initializes our repository
+        IRepository<Product> context;
+        IRepository<ProductCategory> productCategories;
+
+        public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext) //injected the actual classes thru the constructor by accepting the two interfaces
         {
-            context = new InMemoryrepository<Product>(); // initialized our product
-            productCategories = new InMemoryrepository<ProductCategory>();  //initialized productCategories
+            //context = new InMemoryrepository<Product>(); // initialized our product 
+            //productCategories = new InMemoryrepository<ProductCategory>();  //initialized productCategories
+
+            context = productContext; // replaced after injection 
+            productCategories = productCategoryContext;  
         }
         // GET: ProductManager
         public ActionResult Index()
