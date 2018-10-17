@@ -1,0 +1,86 @@
+﻿@model MyShop.Core.Models.Product
+
+@{
+    ViewBag.Title = Model.Name + "Details";
+    //added Model.Name +
+}
+
+@*<h2>Details</h2> deleted*@
+<h2>@Html.DisplayFor(model=>model.Name)</h2>
+@*added*@
+
+<div>
+    @*<h4>Product</h4>
+        <hr />deleted*@
+
+    <div class="col-md-2">
+        <img class="img-responsive" src="~/Content/ProductImages/@Model.Image" />
+
+    </div>
+    @*added*@
+    <div class="col-md-10">
+        @*wrapped the dl class in this div*@
+        <dl class="dl-horizontal">
+            @*<dt>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd> deleted*@
+
+            @*<dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>*@
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+
+            <dd>
+                $@Html.DisplayFor(model => model.Price)  @*added the $ for formatting*@
+            </dd>
+
+            @*<dt>
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Image)
+            </dd> deleted*@
+
+            <dt></dt>@*added*@
+
+            <dd><a href="#" class="btn btn-default">Add To Basket</a></dd>@*added*@
+
+            <dt></dt>@*added*@
+
+            <dd>@Html.ActionLink("Back to List", "Index")</dd>    @*moved up to here from below*@
+        </dl>
+    </div>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) | 
+</p> deleted*@
+
+<div class="col-md-12 clearfix"></div> @*added*@
