@@ -6,11 +6,12 @@
 
 <h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@*@using (Html.BeginForm())*@
+@using (Html.BeginForm("Create", "ProductManager", FormMethod.Post, new { encType = "multipart/form-data" }))
+//we are telling it to begin the form with this Action (Create), the controller (ProductManager) the items (FormMethod.Post) and type of data
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Product</h4>
         <hr />
@@ -42,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Product.Category, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Product.Category, new  SelectList(Model.ProductCategories,"Category", "Category"), new {htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Product.Category, new SelectList(Model.ProductCategories, "Category", "Category"), new { htmlAttributes = new { @class = "form-control" } })
                 
             </div>
         </div>
@@ -50,8 +51,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Product.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Product.Image, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Product.Image, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.Product.Image, new { htmlAttributes = new { @class = "form-control" } })
+                  @Html.ValidationMessageFor(model => model.Product.Image, "", new { @class = "text-danger" })*@
+
+                @*deleted because we are not sending text back to the server*@
+               <input type="file" id="file" name="file" class="form-control" />
             </div>
         </div>
 

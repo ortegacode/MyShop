@@ -7,6 +7,7 @@ using MyShop.Core.Models;
 using MyShop.DataAccess.InMemory;
 using MyShop.Core.ViewModels;
 using MyShop.Core.Contracts;
+using System.IO; // for Path
 
 namespace MyShop.WebUI.Controllers
 {
@@ -47,7 +48,7 @@ namespace MyShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)  // if our validation is not valid
             {
@@ -55,6 +56,14 @@ namespace MyShop.WebUI.Controllers
             }
             else
             {
+                if (file != null) // to make sure a file actually exists because its possible for them to create or save a product without an image
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName); // if there is is an image we set the image property on the product itself using the product.id because a user can upload two files with the same name so by renaming it to the product.id we will always have a unique file reference.   + 
+                      // Path.GetExtension() allows us to get the current file extension
+
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image);  // save to the disk (file.SaveAs) used a special function called Server.MapPath which allows us to enter the relative or virtual path  to the corresponding physical directory on the server ("//Context//ProductImages//").
+
+                }
                 context.Insert(product);    // inserts into the collection 
                 context.Commit();           // saves the changes using the commit()
 
@@ -79,7 +88,7 @@ namespace MyShop.WebUI.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Edit(Product product, string Id)
+        public ActionResult Edit(Product product, string Id, HttpPostedFileBase file)
         {
             Product productToEdit = context.Find(Id);
             if (product == null)
@@ -91,6 +100,12 @@ namespace MyShop.WebUI.Controllers
                 if (!ModelState.IsValid)
                     return View(product);
                 {
+                    if (file != null)
+                    {
+                        productToEdit.Image = product.Id + Path.GetExtension(file.FileName);
+                        file.SaveAs(Server.MapPath("//Content//ProductImages//") + productToEdit.Image);
+                    }
+
                     productToEdit.Category = product.Category;
                     productToEdit.Description = product.Description;
                     productToEdit.Image = product.Image;
