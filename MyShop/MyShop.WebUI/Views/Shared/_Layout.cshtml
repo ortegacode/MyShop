@@ -21,14 +21,17 @@
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             @*<div class="navbar-collapse collapse">*@
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Product Admin", "Index", "ProductManager")</li>
-                    <li>@Html.ActionLink("Category Admin", "Index", "ProductCategoryManager")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Product Admin", "Index", "ProductManager")</li>
+                <li>@Html.ActionLink("Category Admin", "Index", "ProductCategoryManager")</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+            @{
+                Html.RenderAction("BasketSummary", "Basket");  @*added for basket summary*@
+            }
         </div>
+    </div>
     @*</div>*@
     <div class="container body-content">
         @RenderBody()
