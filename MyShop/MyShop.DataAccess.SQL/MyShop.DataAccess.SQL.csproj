@@ -62,6 +62,14 @@
     <Compile Include="Migrations\201810291645292_AddCustomers.Designer.cs">
       <DependentUpon>201810291645292_AddCustomers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810291818526_AddedOrders.cs" />
+    <Compile Include="Migrations\201810291818526_AddedOrders.Designer.cs">
+      <DependentUpon>201810291818526_AddedOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810292029185_addedOrders-redo.cs" />
+    <Compile Include="Migrations\201810292029185_addedOrders-redo.Designer.cs">
+      <DependentUpon>201810292029185_addedOrders-redo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -85,6 +93,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810291645292_AddCustomers.resx">
       <DependentUpon>201810291645292_AddCustomers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291818526_AddedOrders.resx">
+      <DependentUpon>201810291818526_AddedOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810292029185_addedOrders-redo.resx">
+      <DependentUpon>201810292029185_addedOrders-redo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
