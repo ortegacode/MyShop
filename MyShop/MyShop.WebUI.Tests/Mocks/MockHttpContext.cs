@@ -13,6 +13,7 @@ namespace MyShop.WebUI.Tests.Mocks
         private MockRequest request;
         private MockResponse response;
         private HttpCookieCollection cookies;
+        private IPrincipal FakeUser;
 
         public MockHttpContext()
         {
@@ -20,6 +21,19 @@ namespace MyShop.WebUI.Tests.Mocks
             this.request = new MockRequest(cookies);
             this.response = new MockResponse(cookies);
             //created the cookies and passed it thru the requests and responses here because when our classes are reading and writing cookies it needs to work with the same underlying list AKA in this case its always working with the same collection of cookies.
+        }
+
+        public override IPrincipal User
+        {
+            get
+            {
+                return this.FakeUser;
+            }
+
+            set
+            {
+                this.FakeUser = value;
+            }
         }
 
         public override HttpRequestBase Request

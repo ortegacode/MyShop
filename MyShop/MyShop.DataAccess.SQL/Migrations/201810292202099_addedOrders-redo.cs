@@ -7,12 +7,12 @@ namespace MyShop.DataAccess.SQL.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.OrderItems", "Image", c => c.String());
+            AddColumn("dbo.Orders", "State", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.OrderItems", "Image");
+            DropColumn("dbo.Orders", "State");
         }
     }
 }
