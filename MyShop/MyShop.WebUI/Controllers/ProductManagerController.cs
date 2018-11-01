@@ -11,6 +11,7 @@ using System.IO; // for Path
 
 namespace MyShop.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductManagerController : Controller
     {
         //ProductRepository context;   // instance of our product repository
